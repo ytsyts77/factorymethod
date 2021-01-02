@@ -7,11 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class StorageTypeTest {
     @Test
     void test() {
-        assertTrue(StorageType.DBMS == StorageType.DBMS);
-        assertTrue(StorageType.FILE == StorageType.FILE);
-        assertTrue(StorageType.DBMS != StorageType.FILE);
-        assertTrue(StorageType.FILE != StorageType.DBMS);
-        assertTrue(StorageType.DBMS == StorageType.get("dbms"));
-        assertTrue(StorageType.FILE == StorageType.get("file"));
+        assertTrue(ExportType.PDF == ExportType.PDF);
+        assertTrue(ExportType.GIF == ExportType.GIF);
+        assertTrue(ExportType.PDF != ExportType.GIF);
+        assertTrue(ExportType.GIF != ExportType.PDF);
+        assertTrue(ExportType.PDF == ExportType.get("dbms"));
+        assertTrue(ExportType.GIF == ExportType.get("file"));
     }
 }

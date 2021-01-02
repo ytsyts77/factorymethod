@@ -1,5 +1,5 @@
 package kr.co.kbinsure.helloworld.factorymethod.service;
 
-public enum LocationType {
-    INT, EXT
+public enum TargetType {
+    MAIL, FAX
 }

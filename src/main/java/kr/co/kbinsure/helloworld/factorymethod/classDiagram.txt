@@ -1,65 +1,74 @@
 @startuml
-class FileController {
-    -IntStorageServiceFactory intStorageServiceFactory
-    -ExtStorageServiceFactory extStorageServiceFactory
-    +getIntFile()
-    +getExtFile()
+class ExportController {
+    -FaxExportServiceFactory faxExportServiceFactory
+    -MailExportServiceFactory mailExportServiceFactory
+    +exportMail()
+    +exportFax()
 }
 
-FileController --> ExtStorageServiceFactory
-FileController --> IntStorageServiceFactory
-abstract StorageServiceFactory {
-    -checkAuth()
-    +get()
-    #getService()
+ExportController --> FaxExportServiceFactory
+ExportController --> MailExportServiceFactory
+abstract ExportServiceFactory {
+    +exportAndTransfer()
+    #ExportService()
 }
 
-class ExtStorageServiceFactory extends StorageServiceFactory {
+class FaxExportServiceFactory extends ExportServiceFactory {
     -Map<StorageType, StorageService> serviceMap;
     #getService()
 }
 
-class IntStorageServiceFactory extends StorageServiceFactory {
+class MailExportServiceFactory extends ExportServiceFactory {
     -Map<StorageType, StorageService> serviceMap;
     #getService()
 }
 
-StorageServiceFactory --> StorageService
-interface StorageService {
-    getFile()
+ExportServiceFactory --> ExportService
+interface ExportService {
+    export()
+    transfer()
+    deleteLocal()
     getStorageType()
     getLocationType()
 }
 
-class ExtDBMSStorageService implements StorageService {
-    +getFile()
+class FaxGifExportService implements ExportService {
+    +export()
+    +transfer()
+    +deleteLocal()
     +getStorageType()
     +getLocationType()
 }
 
-class ExtFileStorageService implements StorageService {
-    +getFile()
+class FaxPdfExportService implements ExportService {
+    +export()
+    +transfer()
+    +deleteLocal()
     +getStorageType()
     +getLocationType()
 }
 
-class IntDBMSStorageService implements StorageService {
-    +getFile()
+class MailGifExportService implements ExportService {
+    +export()
+    +transfer()
+    +deleteLocal()
     +getStorageType()
     +getLocationType()
 }
 
-class IntFileStorageService implements StorageService {
-    +getFile()
+class MailPdfExportService implements ExportService {
+    +export()
+    +transfer()
+    +deleteLocal()
     +getStorageType()
     +getLocationType()
 }
 
-enum LocationType {
-    INT, EXT
+enum TargetType {
+    MAIL, FAX
 }
 
-enum StorageType {
-    FILE, DBMS
+enum ExportType {
+    GIF, PDF
 }
 @enduml
