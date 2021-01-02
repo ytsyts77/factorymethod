@@ -1,0 +1,65 @@
+@startuml
+class FileController {
+    -IntStorageServiceFactory intStorageServiceFactory
+    -ExtStorageServiceFactory extStorageServiceFactory
+    +getIntFile()
+    +getExtFile()
+}
+
+FileController --> ExtStorageServiceFactory
+FileController --> IntStorageServiceFactory
+abstract StorageServiceFactory {
+    -checkAuth()
+    +get()
+    #getService()
+}
+
+class ExtStorageServiceFactory extends StorageServiceFactory {
+    -Map<StorageType, StorageService> serviceMap;
+    #getService()
+}
+
+class IntStorageServiceFactory extends StorageServiceFactory {
+    -Map<StorageType, StorageService> serviceMap;
+    #getService()
+}
+
+StorageServiceFactory --> StorageService
+interface StorageService {
+    getFile()
+    getStorageType()
+    getLocationType()
+}
+
+class ExtDBMSStorageService implements StorageService {
+    +getFile()
+    +getStorageType()
+    +getLocationType()
+}
+
+class ExtFileStorageService implements StorageService {
+    +getFile()
+    +getStorageType()
+    +getLocationType()
+}
+
+class IntDBMSStorageService implements StorageService {
+    +getFile()
+    +getStorageType()
+    +getLocationType()
+}
+
+class IntFileStorageService implements StorageService {
+    +getFile()
+    +getStorageType()
+    +getLocationType()
+}
+
+enum LocationType {
+    INT, EXT
+}
+
+enum StorageType {
+    FILE, DBMS
+}
+@enduml
