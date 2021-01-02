@@ -10,7 +10,7 @@ ExportController --> FaxExportServiceFactory
 ExportController --> MailExportServiceFactory
 abstract ExportServiceFactory {
     +exportAndTransfer()
-    #ExportService()
+    #getService()
 }
 
 class FaxExportServiceFactory extends ExportServiceFactory {
